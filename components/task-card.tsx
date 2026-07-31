@@ -31,18 +31,21 @@ import {
  */
 export const dragTokenMap = new Map<string, number>()
 
-function formatDueDate(value: Date | string | null): {
+function formatDueDate(value: string | null): {
   label: string
   overdue: boolean
 } | null {
   if (!value) return null
-  const d = new Date(value)
-  if (Number.isNaN(d.getTime())) return null
+  const parts = value.split('-')
+  if (parts.length !== 3) return null
+  const [y, m, d] = parts.map(Number)
+  if (!y || !m || !d) return null
+  const local = new Date(y, m - 1, d)
   const today = new Date()
   today.setHours(0, 0, 0, 0)
-  const overdue = d < today
+  const overdue = local < today
   return {
-    label: d.toLocaleDateString('es-ES', {
+    label: local.toLocaleDateString('es-ES', {
       day: 'numeric',
       month: 'short',
     }),

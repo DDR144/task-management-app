@@ -31,12 +31,10 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-// Format a Date to yyyy-MM-dd for <input type="date">
-function toDateInput(value: Date | string | null): string {
+// Format a yyyy-MM-dd string for <input type="date">
+function toDateInput(value: string | null): string {
   if (!value) return ''
-  const d = new Date(value)
-  if (Number.isNaN(d.getTime())) return ''
-  return d.toISOString().slice(0, 10)
+  return value
 }
 
 export function TaskDialog({
