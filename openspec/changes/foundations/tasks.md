@@ -41,12 +41,12 @@ Each PR: `gh pr create --base main --head <branch>`; verify `gh pr view`.
 - [x] 2.3 Manual: stale updatedAt rejected (lock preserved).
 
 ## PR 3 — Due Dates
-- [ ] 3.1 schema.ts:75: `timestamp('dueDate')` → `date('dueDate')` string mode (not `mode:'date'`).
-- [ ] 3.2 Generate 0001 (`USING ("dueDate"::date)`); sample rows pre/post.
-- [ ] 3.3 Apply: docker compose up + `drizzle-kit migrate`.
-- [ ] 3.4 parseDueDate: regex `^\d{4}-\d{2}-\d{2}$` → `string|null`; no `new Date()`.
-- [ ] 3.5 task-card: local-midnight parse → es-ES "31 jul"; overdue vs local; NULL never.
-- [ ] 3.6 task-dialog: return string as-is. Verify "31 jul" card+dialog; overdue 08-01, not 07-31.
+- [x] 3.1 schema.ts:75: `timestamp('dueDate')` → `date('dueDate')` string mode (not `mode:'date'`).
+- [x] 3.2 Generate 0001 (`USING ("dueDate"::date)`); sample rows pre/post.
+- [x] 3.3 Apply: docker compose up + `drizzle-kit migrate`.
+- [x] 3.4 parseDueDate: regex `^\d{4}-\d{2}-\d{2}$` → `string|null`; no `new Date()`.
+- [x] 3.5 task-card: local-midnight parse → es-ES "31 jul"; overdue vs local; NULL never.
+- [x] 3.6 task-dialog: return string as-is. Verify "31 jul" card+dialog; overdue 08-01, not 07-31.
 
 ## PR 4 — DB Indexes
 - [ ] 4.1 schema.ts: `.index()` on the 3 userId FKs.
