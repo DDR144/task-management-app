@@ -60,7 +60,7 @@ export const verification = pgTable('verification', {
 })
 
 // --- App tables ------------------------------------------------------------
-// `userId` is a plain column (no FK) used to scope every query per user.
+// `userId` is a foreign key referencing the Better Auth `user` table.
 
 export type TaskPriority = 'alta' | 'media' | 'baja'
 export type TaskStatus = 'pendiente' | 'en_progreso' | 'completada'

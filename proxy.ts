@@ -4,7 +4,7 @@ import { getSessionCookie } from 'better-auth/cookies'
 
 /**
  * Auth proxy for protected routes.
- * Checks the session cookie (no DB access) on `/` and `/tasks/*`.
+ * Checks the session cookie (no DB access) on `/`.
  * Public routes (sign-in, sign-up, api/auth/*, _next/*) bypass the check.
  */
 export async function proxy(request: NextRequest) {
@@ -12,7 +12,6 @@ export async function proxy(request: NextRequest) {
 
   if (!sessionCookie) {
     const signInUrl = new URL('/sign-in', request.url)
-    signInUrl.searchParams.set('callbackUrl', request.nextUrl.pathname)
     return NextResponse.redirect(signInUrl)
   }
 
@@ -20,5 +19,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/tasks/:path*'],
+  matcher: ['/'],
 }

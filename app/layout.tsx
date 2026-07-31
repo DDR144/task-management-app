@@ -21,7 +21,6 @@ export const metadata: Metadata = {
   title: 'Tablero de Tareas',
   description:
     'Gestiona tus tareas con un tablero Kanban simple: prioridades, fechas límite y estados.',
-  generator: 'v0.app',
 }
 
 export const viewport: Viewport = {
