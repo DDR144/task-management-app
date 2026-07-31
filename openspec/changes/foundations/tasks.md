@@ -27,13 +27,13 @@ Chain strategy: stacked-to-main
 Each PR: `gh pr create --base main --head <branch>`; verify `gh pr view`.
 
 ## PR 1 — Repo Hygiene
-- [ ] 1.1 `git init`; `gh repo create --private`; add remote; verify toplevel == root.
-- [ ] 1.2 Rewrite `.gitignore`: tsconfig.tsbuildinfo, `.env*` (keep `.env.example`), `**/*:Zone.Identifier`, node_modules, .next.
-- [ ] 1.3 Delete 44 `*:Zone.Identifier`; verify `find` count == 0.
-- [ ] 1.4 Selective first commit; RED: staged list free of secrets/.env.local; push; verify private.
-- [ ] 1.5 Drop `ignoreBuildErrors` in next.config.mjs; add `typecheck` script; verify `pnpm build` passes.
-- [ ] 1.6 Cleanup: name/packageManager in package.json; overrides → pnpm-workspace.yaml (`esbuild: true`); drop layout generator; fix schema comment; proxy matcher `['/']` + drop callbackUrl; sonner light, drop next-themes; fresh install.
-- [ ] 1.7 Create README.md (prereqs, setup, env vars, scripts, architecture).
+- [x] 1.1 `git init`; `gh repo create --private`; add remote; verify toplevel == root.
+- [x] 1.2 Rewrite `.gitignore`: tsconfig.tsbuildinfo, `.env*` (keep `.env.example`), `**/*:Zone.Identifier`, node_modules, .next.
+- [x] 1.3 Delete 44 `*:Zone.Identifier`; verify `find` count == 0.
+- [x] 1.4 Selective first commit; RED: staged list free of secrets/.env.local; push; verify private.
+- [x] 1.5 Drop `ignoreBuildErrors` in next.config.mjs; add `typecheck` script; verify `pnpm build` passes.
+- [x] 1.6 Cleanup: name/packageManager in package.json; overrides → pnpm-workspace.yaml (`esbuild: true`); drop layout generator; fix schema comment; proxy matcher `['/']` + drop callbackUrl; sonner light, drop next-themes; fresh install.
+- [x] 1.7 Create README.md (prereqs, setup, env vars, scripts, architecture).
 
 ## PR 2 — Optimistic Lock
 - [ ] 2.1 tasks.ts:150: `eq(sql\`date_trunc('ms', ${tasks.updatedAt})\`, new Date(updatedAt))` + import `sql`.
