@@ -8,6 +8,13 @@
       "when": 1785391362719,
       "tag": "0000_sleepy_enchantress",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1785491539849,
+      "tag": "0001_loose_namorita",
+      "breakpoints": true
     }
   ]
 }

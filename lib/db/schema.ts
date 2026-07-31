@@ -4,6 +4,7 @@ import {
   timestamp,
   boolean,
   serial,
+  date,
 } from 'drizzle-orm/pg-core'
 
 // --- Better Auth required tables -------------------------------------------
@@ -72,7 +73,7 @@ export const tasks = pgTable('tasks', {
   description: text('description'),
   priority: text('priority').notNull().default('media'),
   status: text('status').notNull().default('pendiente'),
-  dueDate: timestamp('dueDate'),
+  dueDate: date('dueDate'),
   createdAt: timestamp('createdAt').notNull().defaultNow(),
   updatedAt: timestamp('updatedAt').notNull().defaultNow(),
 })

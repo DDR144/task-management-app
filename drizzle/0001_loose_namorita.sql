@@ -1,0 +1,1 @@
+ALTER TABLE "tasks" ALTER COLUMN "dueDate" SET DATA TYPE date USING ("dueDate"::date);
