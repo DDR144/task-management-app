@@ -3,7 +3,7 @@
 import { auth } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { tasks, type Task, type TaskPriority, type TaskStatus } from '@/lib/db/schema'
-import { and, asc, desc, eq } from 'drizzle-orm'
+import { and, asc, desc, eq, sql } from 'drizzle-orm'
 import { headers } from 'next/headers'
 import { revalidatePath } from 'next/cache'
 
@@ -147,7 +147,7 @@ export async function updateTaskStatus(
       and(
         eq(tasks.id, id),
         eq(tasks.userId, userId),
-        eq(tasks.updatedAt, new Date(updatedAt)),
+        eq(sql`date_trunc('millisecond', ${tasks.updatedAt})`, new Date(updatedAt)),
       ),
     )
     .returning()
