@@ -1,0 +1,21 @@
+context: |
+  Next.js 16.2.6 App Router + React 19 + TypeScript 5.7
+  Database: PostgreSQL via Drizzle ORM + pg driver
+  Auth: Better Auth (email/password)
+  UI: Tailwind CSS v4 + shadcn/ui + base-ui (drag)
+  Package manager: pnpm with workspace config
+  Docker compose for local PostgreSQL (taskflow-db)
+
+strict_tdd: false
+testing:
+  runner: null
+  unit: false
+  integration: false
+  e2e: false
+  coverage: false
+  lint: eslint (no config found)
+  typecheck: tsc (implicit via Next.js)
+  format: none
+
+artifact_store: hybrid
+delivery_s

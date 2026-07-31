@@ -1,0 +1,27 @@
+# v0 sandbox internal files
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+.snowflake/
+.v0-trash/
+.vercel/
+
+# Build artifacts
+tsconfig.tsbuildinfo
+.next/
+
+# Environment variables (secrets)
+.env
+.env*.local
+
+# Windows transfer artifacts
+*:Zone.Identifier
+
+# Common ignores
+node_modules/
+.DS_Store
+
+# IDE / tool internals
+.claude/
+.agents/
+.atl/
