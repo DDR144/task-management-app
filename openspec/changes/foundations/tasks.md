@@ -49,9 +49,9 @@ Each PR: `gh pr create --base main --head <branch>`; verify `gh pr view`.
 - [x] 3.6 task-dialog: return string as-is. Verify "31 jul" card+dialog; overdue 08-01, not 07-31.
 
 ## PR 4 — DB Indexes
-- [ ] 4.1 schema.ts: `.index()` on the 3 userId FKs.
-- [ ] 4.2 Generate 0002 (3 CREATE INDEX, IF NOT EXISTS if absent); apply.
-- [ ] 4.3 Verify pg_indexes shows 3; EXPLAIN uses them.
+- [x] 4.1 schema.ts: `.index()` on the 3 userId FKs.
+- [x] 4.2 Generate 0002 (3 CREATE INDEX, IF NOT EXISTS if absent); apply.
+- [x] 4.3 Verify pg_indexes shows 3; EXPLAIN uses them.
 
 ## PR 5 — Quality Gates
 - [ ] 5.1 devDeps: eslint@^9, eslint-config-next@16.2.12, typescript-eslint@^8.
