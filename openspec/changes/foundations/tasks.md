@@ -54,7 +54,7 @@ Each PR: `gh pr create --base main --head <branch>`; verify `gh pr view`.
 - [x] 4.3 Verify pg_indexes shows 3; EXPLAIN uses them.
 
 ## PR 5 — Quality Gates
-- [ ] 5.1 devDeps: eslint@^9, eslint-config-next@16.2.12, typescript-eslint@^8.
-- [ ] 5.2 eslint.config.mjs: core-web-vitals + tseslint + globalIgnores(node_modules/.next/drizzle).
-- [ ] 5.3 Fix violations (autofix; disable-with-reason); `pnpm lint` exit 0.
-- [ ] 5.4 ci.yml: install --frozen-lockfile → typecheck → lint; DB-free, no secrets; CI green.
+- [x] 5.1 devDeps: eslint@^9, eslint-config-next@16.2.12, typescript-eslint@^8.
+- [x] 5.2 eslint.config.mjs: core-web-vitals + tseslint + globalIgnores(node_modules/.next/drizzle).
+- [x] 5.3 Fix violations (autofix; disable-with-reason); `pnpm lint` exit 0.
+- [x] 5.4 ci.yml: install --frozen-lockfile → typecheck → lint; DB-free, no secrets; CI green.
