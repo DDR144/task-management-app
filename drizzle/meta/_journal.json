@@ -15,6 +15,13 @@
       "when": 1785491539849,
       "tag": "0001_loose_namorita",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1785492246823,
+      "tag": "0002_short_nick_fury",
+      "breakpoints": true
     }
   ]
 }

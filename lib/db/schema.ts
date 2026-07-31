@@ -5,6 +5,7 @@ import {
   boolean,
   serial,
   date,
+  index,
 } from 'drizzle-orm/pg-core'
 
 // --- Better Auth required tables -------------------------------------------
@@ -31,7 +32,9 @@ export const session = pgTable('session', {
   userId: text('userId')
     .notNull()
     .references(() => user.id, { onDelete: 'cascade' }),
-})
+}, (table) => ({
+  userIdIdx: index('session_userId_idx').on(table.userId),
+}))
 
 export const account = pgTable('account', {
   id: text('id').primaryKey(),
@@ -49,7 +52,9 @@ export const account = pgTable('account', {
   password: text('password'),
   createdAt: timestamp('createdAt').notNull().defaultNow(),
   updatedAt: timestamp('updatedAt').notNull().defaultNow(),
-})
+}, (table) => ({
+  userIdIdx: index('account_userId_idx').on(table.userId),
+}))
 
 export const verification = pgTable('verification', {
   id: text('id').primaryKey(),
@@ -76,6 +81,8 @@ export const tasks = pgTable('tasks', {
   dueDate: date('dueDate'),
   createdAt: timestamp('createdAt').notNull().defaultNow(),
   updatedAt: timestamp('updatedAt').notNull().defaultNow(),
-})
+}, (table) => ({
+  userIdIdx: index('tasks_userId_idx').on(table.userId),
+}))
 
 export type Task = typeof tasks.$inferSelect
