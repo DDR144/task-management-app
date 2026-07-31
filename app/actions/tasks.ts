@@ -38,11 +38,10 @@ function parseStatus(value: FormDataEntryValue | null): TaskStatus {
   return STATUSES.includes(v as TaskStatus) ? (v as TaskStatus) : 'pendiente'
 }
 
-function parseDueDate(value: FormDataEntryValue | null): Date | null {
+function parseDueDate(value: FormDataEntryValue | null): string | null {
   const v = String(value ?? '').trim()
   if (!v) return null
-  const d = new Date(v)
-  return Number.isNaN(d.getTime()) ? null : d
+  return /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : null
 }
 
 export async function getTasks(): Promise<GetTasksResult> {
