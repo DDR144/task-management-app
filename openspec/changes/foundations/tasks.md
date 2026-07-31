@@ -36,9 +36,9 @@ Each PR: `gh pr create --base main --head <branch>`; verify `gh pr view`.
 - [x] 1.7 Create README.md (prereqs, setup, env vars, scripts, architecture).
 
 ## PR 2 — Optimistic Lock
-- [ ] 2.1 tasks.ts:150: `eq(sql\`date_trunc('ms', ${tasks.updatedAt})\`, new Date(updatedAt))` + import `sql`.
-- [ ] 2.2 Manual: first status change on new task succeeds.
-- [ ] 2.3 Manual: stale updatedAt rejected (lock preserved).
+- [x] 2.1 tasks.ts:150: `eq(sql\`date_trunc('ms', ${tasks.updatedAt})\`, new Date(updatedAt))` + import `sql`.
+- [x] 2.2 Manual: first status change on new task succeeds.
+- [x] 2.3 Manual: stale updatedAt rejected (lock preserved).
 
 ## PR 3 — Due Dates
 - [ ] 3.1 schema.ts:75: `timestamp('dueDate')` → `date('dueDate')` string mode (not `mode:'date'`).
