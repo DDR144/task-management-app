@@ -8,11 +8,12 @@ Ensure concurrent task updates are detected correctly without false conflicts, w
 
 ### Requirement: Millisecond-Precision Timestamp Comparison
 
-The system MUST compare task `updatedAt` timestamps at millisecond precision on the server side when evaluating optimistic locks. The comparison MUST use `date_trunc('millisecond', updatedAt)` against `new Date(updatedAt)` to eliminate microsecond false conflicts.
+The system MUST compare task `updatedAt` timestamps at millisecond precision on the server side when evaluating optimistic locks. The comparison MUST use `date_trunc('millisecond', updatedAt)` against the raw client-supplied ISO string (e.g. `2026-07-31T23:42:06.095Z`) to eliminate microsecond false conflicts. The `updatedAt` column MUST be `timestamp with time zone` so the comparison is timezone-independent. The client-supplied value MUST NOT be re-wrapped in `new Date(...)` before comparison, because node-postgres serializes `Date` objects with the local timezone offset, which can diverge from the stored value.
 
 #### Scenario: First status change on new task succeeds
 
 - GIVEN a task was just created (DB `now()` produced microsecond-precision timestamp)
+- AND the `updatedAt` column is `timestamp with time zone`
 - WHEN the same user changes the task status immediately
 - THEN the update succeeds without a false "modified concurrently" conflict
 
