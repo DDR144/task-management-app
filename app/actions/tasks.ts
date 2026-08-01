@@ -139,6 +139,11 @@ export async function updateTaskStatus(
   if (!updatedAt)
     return { ok: false, error: 'Falta el campo updatedAt para verificación de concurrencia.' }
 
+  // Compare against the raw ISO string rather than `new Date(updatedAt)`.
+  // `updatedAt` arrives from the client as `...Z` (UTC) and is compared to the
+  // `timestamptz` column by instant, which is timezone-independent. Passing the
+  // string keeps the comparison literal and avoids any node-postgres Date
+  // serialization between the client value and the SQL parameter.
   const [task] = await db
     .update(tasks)
     .set({ status, updatedAt: new Date() })
@@ -146,7 +151,7 @@ export async function updateTaskStatus(
       and(
         eq(tasks.id, id),
         eq(tasks.userId, userId),
-        eq(sql`date_trunc('millisecond', ${tasks.updatedAt})`, new Date(updatedAt)),
+        eq(sql`date_trunc('millisecond', ${tasks.updatedAt})`, updatedAt),
       ),
     )
     .returning()
