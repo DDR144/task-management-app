@@ -18,4 +18,4 @@ testing:
   format: none
 
 artifact_store: hybrid
-delivery_s
+delivery_strategy: ask-on-risk
