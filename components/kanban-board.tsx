@@ -106,7 +106,7 @@ export function KanbanBoard({ initialTasks }: { initialTasks: Task[] }) {
             value={priorityFilter}
             onValueChange={(v) => setPriorityFilter(v as PriorityFilter)}
           >
-            <SelectTrigger id="priority-filter" className="w-40 bg-card">
+            <SelectTrigger id="priority-filter" className="w-40 bg-card shadow-xs">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -120,7 +120,7 @@ export function KanbanBoard({ initialTasks }: { initialTasks: Task[] }) {
           </Select>
         </div>
 
-        <Button onClick={() => openCreate('pendiente')}>
+        <Button onClick={() => openCreate('pendiente')} className="shadow-sm">
           <Plus className="h-4 w-4" />
           Nueva tarea
         </Button>
@@ -142,29 +142,29 @@ export function KanbanBoard({ initialTasks }: { initialTasks: Task[] }) {
                 }}
                 onDragLeave={() => setDragOverStatus(null)}
                 onDrop={(e) => handleDrop(status, e)}
-                className={`flex flex-col rounded-xl border bg-secondary/40 transition-colors ${
+                className={`flex flex-col rounded-xl border bg-secondary/30 shadow-xs transition-all duration-200 ${
                   isDragOver
-                    ? 'border-primary bg-accent/60'
+                    ? 'border-primary border-2 bg-primary/5 shadow-lg shadow-primary/10 scale-[1.01]'
                     : 'border-border'
                 }`}
               >
-                <header className="flex items-center justify-between gap-2 px-4 pt-4">
+                <header className="flex items-center justify-between gap-2 border-b border-border/40 px-4 py-3">
                   <div className="flex items-center gap-2">
                     <span
                       className={`h-2.5 w-2.5 rounded-full ${STATUS_ACCENT[status]}`}
                       aria-hidden="true"
                     />
-                    <h2 className="font-heading text-sm font-semibold text-foreground">
+                    <h2 className="font-heading text-xs font-semibold uppercase tracking-wider text-foreground">
                       {STATUS_LABELS[status]}
                     </h2>
-                    <span className="rounded-full bg-background px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                    <span className="rounded-full bg-background px-2 py-0.5 text-xs font-medium tabular-nums text-muted-foreground transition-all">
                       {items.length}
                     </span>
                   </div>
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-7 w-7 text-muted-foreground"
+                    className="h-7 w-7 text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
                     onClick={() => openCreate(status)}
                   >
                     <Plus className="h-4 w-4" />
@@ -174,7 +174,7 @@ export function KanbanBoard({ initialTasks }: { initialTasks: Task[] }) {
                   </Button>
                 </header>
 
-                <div className="flex min-h-24 flex-1 flex-col gap-3 p-4">
+                <div className="flex min-h-28 flex-1 flex-col gap-2.5 overflow-y-auto p-3.5">
                   {items.length === 0 ? (
                     <p className="rounded-lg border border-dashed border-border py-6 text-center text-xs text-muted-foreground">
                       {priorityFilter === 'all'
@@ -206,16 +206,16 @@ export function KanbanBoard({ initialTasks }: { initialTasks: Task[] }) {
 function EmptyState({ onCreate }: { onCreate: () => void }) {
   return (
     <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card px-6 py-16 text-center">
-      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-primary">
+      <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
         <Plus className="h-6 w-6" />
       </div>
-      <h2 className="font-heading text-lg font-semibold text-foreground">
+      <h2 className="font-heading text-xl font-bold text-foreground">
         Aún no tienes tareas
       </h2>
-      <p className="mt-1 max-w-sm text-sm text-muted-foreground text-pretty">
-        Crea tu primera tarea para empezar a organizar tu trabajo en el tablero.
+      <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground text-pretty">
+        Crea tu primera tarea para empezar a organizar tu trabajo. Puedes arrastrarlas entre columnas para cambiar su estado.
       </p>
-      <Button className="mt-5" onClick={onCreate}>
+      <Button className="mt-6 shadow-sm" size="lg" onClick={onCreate}>
         <Plus className="h-4 w-4" />
         Crear tarea
       </Button>

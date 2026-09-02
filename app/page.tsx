@@ -20,8 +20,8 @@ export default async function Page() {
         email={session.user.email ?? ''}
       />
       <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-        <div className="mb-6">
-          <h2 className="font-heading text-2xl font-semibold tracking-tight text-foreground text-balance">
+        <div className="mb-8">
+          <h2 className="font-heading text-2xl font-bold tracking-tight text-foreground text-balance">
             Mi tablero
           </h2>
           <p className="mt-1 text-sm text-muted-foreground text-pretty">

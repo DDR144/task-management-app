@@ -106,17 +106,17 @@ export function TaskCard({
       draggable={!isPending}
       onDragStart={handleDragStart}
       data-pending={isPending}
-      className="group rounded-lg border border-border bg-card p-3 shadow-sm transition-shadow hover:shadow-md data-[pending=true]:opacity-60"
+      className="group rounded-xl border border-border/60 bg-card p-4 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/20 data-[pending=true]:opacity-60 data-[pending=true]:pointer-events-none"
     >
       <div className="flex items-start gap-2">
         <GripVertical
-          className="mt-0.5 h-4 w-4 shrink-0 cursor-grab text-muted-foreground/50"
+          className="mt-0.5 h-4 w-4 shrink-0 cursor-grab text-muted-foreground/30 opacity-0 transition-opacity group-hover:opacity-100"
           aria-hidden="true"
         />
         <div className="min-w-0 flex-1">
           <h3
-            className={`text-sm font-medium leading-snug text-pretty ${
-              isDone ? 'text-muted-foreground line-through' : 'text-foreground'
+            className={`text-sm font-semibold leading-snug text-pretty ${
+              isDone ? 'text-muted-foreground/70 line-through' : 'text-foreground'
             }`}
           >
             {task.title}
@@ -168,7 +168,7 @@ export function TaskCard({
         </DropdownMenu>
       </div>
 
-      <div className="mt-3 flex items-center gap-2 pl-6">
+      <div className="mt-2.5 flex items-center gap-2 pl-5">
         <Badge
           variant="outline"
           className={`text-xs font-medium ${PRIORITY_BADGE[task.priority as TaskPriority]}`}

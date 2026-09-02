@@ -41,13 +41,13 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
   }
 
   return (
-    <main className="min-h-svh bg-background flex items-center justify-center px-4">
-      <Card className="w-full max-w-sm p-6">
+    <main className="min-h-svh bg-gradient-to-br from-background via-background to-primary/5 flex items-center justify-center px-4">
+      <Card className="w-full max-w-sm p-8 shadow-xl shadow-black/5 ring-1 ring-border/50">
         <div className="mb-6">
-          <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <CheckSquare className="h-5 w-5" aria-hidden="true" />
+          <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/25">
+            <CheckSquare className="h-6 w-6" aria-hidden="true" />
           </div>
-          <h1 className="font-heading text-2xl font-semibold tracking-tight text-foreground text-balance">
+          <h1 className="font-heading text-2xl font-bold tracking-tight text-foreground text-balance">
             {isSignUp ? 'Crea tu cuenta' : 'Bienvenido de nuevo'}
           </h1>
           <p className="text-sm text-muted-foreground mt-1 text-pretty">

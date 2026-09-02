@@ -14,9 +14,9 @@ export const STATUS_LABELS: Record<TaskStatus, string> = {
 
 // Tailwind classes for the accent bar / header of each column
 export const STATUS_ACCENT: Record<TaskStatus, string> = {
-  pendiente: 'bg-muted-foreground/40',
+  pendiente: 'bg-amber-400',
   en_progreso: 'bg-primary',
-  completada: 'bg-chart-3',
+  completada: 'bg-emerald-400',
 }
 
 export const PRIORITY_ORDER: TaskPriority[] = ['alta', 'media', 'baja']
