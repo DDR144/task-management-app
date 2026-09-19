@@ -4,6 +4,7 @@ import {
   timestamp,
   boolean,
   serial,
+  integer,
   date,
   index,
 } from 'drizzle-orm/pg-core'
@@ -71,9 +72,22 @@ export const verification = pgTable('verification', {
 export type TaskPriority = 'alta' | 'media' | 'baja'
 export type TaskStatus = 'pendiente' | 'en_progreso' | 'completada'
 
+export const projects = pgTable('projects', {
+  id: serial('id').primaryKey(),
+  userId: text('userId').notNull().references(() => user.id, { onDelete: 'cascade' }),
+  name: text('name').notNull(),
+  description: text('description'),
+  color: text('color').default('default'),
+  createdAt: timestamp('createdAt', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updatedAt', { withTimezone: true }).notNull().defaultNow(),
+}, (table) => ({
+  userIdIdx: index('projects_userId_idx').on(table.userId),
+}))
+
 export const tasks = pgTable('tasks', {
   id: serial('id').primaryKey(),
   userId: text('userId').notNull().references(() => user.id, { onDelete: 'cascade' }),
+  projectId: integer('projectId').references(() => projects.id, { onDelete: 'set null' }),
   title: text('title').notNull(),
   description: text('description'),
   priority: text('priority').notNull().default('media'),
@@ -86,3 +100,4 @@ export const tasks = pgTable('tasks', {
 }))
 
 export type Task = typeof tasks.$inferSelect
+export type Project = typeof projects.$inferSelect

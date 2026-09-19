@@ -42,11 +42,13 @@ export function TaskDialog({
   onOpenChange,
   task,
   defaultStatus = 'pendiente',
+  projectId,
 }: {
   open: boolean
   onOpenChange: (open: boolean) => void
   task?: Task | null
   defaultStatus?: TaskStatus
+  projectId: number
 }) {
   const router = useRouter()
   const [isPending, startTransition] = useTransition()
@@ -97,6 +99,7 @@ export function TaskDialog({
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input type="hidden" name="projectId" value={projectId} />
           <div className="flex flex-col gap-2">
             <Label htmlFor="title">Título</Label>
             <Input

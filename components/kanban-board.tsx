@@ -26,7 +26,13 @@ import { TaskDialog } from '@/components/task-dialog'
 
 type PriorityFilter = TaskPriority | 'all'
 
-export function KanbanBoard({ initialTasks }: { initialTasks: Task[] }) {
+export function KanbanBoard({
+  initialTasks,
+  projectId,
+}: {
+  initialTasks: Task[]
+  projectId: number
+}) {
   const router = useRouter()
   const [, startTransition] = useTransition()
 
@@ -198,6 +204,7 @@ export function KanbanBoard({ initialTasks }: { initialTasks: Task[] }) {
         onOpenChange={setDialogOpen}
         task={editingTask}
         defaultStatus={dialogStatus}
+        projectId={projectId}
       />
     </div>
   )

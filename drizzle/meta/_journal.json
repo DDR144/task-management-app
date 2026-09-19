@@ -29,6 +29,13 @@
       "when": 1785542455841,
       "tag": "0003_timestamps-with-timezone",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1789779142562,
+      "tag": "0004_sloppy_frog_thor",
+      "breakpoints": true
     }
   ]
 }

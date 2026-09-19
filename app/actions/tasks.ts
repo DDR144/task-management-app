@@ -2,7 +2,13 @@
 
 import { auth } from '@/lib/auth'
 import { db } from '@/lib/db'
-import { tasks, type Task, type TaskPriority, type TaskStatus } from '@/lib/db/schema'
+import {
+  projects,
+  tasks,
+  type Task,
+  type TaskPriority,
+  type TaskStatus,
+} from '@/lib/db/schema'
 import { and, asc, desc, eq, sql } from 'drizzle-orm'
 import { headers } from 'next/headers'
 import { revalidatePath } from 'next/cache'
@@ -44,15 +50,29 @@ function parseDueDate(value: FormDataEntryValue | null): string | null {
   return /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : null
 }
 
-export async function getTasks(): Promise<GetTasksResult> {
+function parseProjectId(value: FormDataEntryValue | null): number | null {
+  const v = String(value ?? '').trim()
+  if (!v) return null
+  const n = Number(v)
+  return Number.isInteger(n) && n > 0 ? n : null
+}
+
+export async function getTasks(projectId?: number): Promise<GetTasksResult> {
   const authResult = await getUserId()
   if (!authResult.ok) return { ok: false, error: authResult.error }
   const { userId } = authResult
+
+  const where =
+    projectId !== undefined
+      ? and(eq(tasks.userId, userId), eq(tasks.projectId, projectId))
+      : eq(tasks.userId, userId)
+
   const result = await db
     .select()
     .from(tasks)
-    .where(eq(tasks.userId, userId))
+    .where(where)
     .orderBy(asc(tasks.status), desc(tasks.createdAt))
+
   return { ok: true, tasks: result }
 }
 
@@ -70,6 +90,17 @@ export async function createTask(formData: FormData): Promise<ActionResult> {
   if (descriptionRaw.length > 1000)
     return { ok: false, error: 'La descripción no puede superar 1000 caracteres.' }
 
+  const projectId = parseProjectId(formData.get('projectId'))
+  if (projectId !== null) {
+    const owned = await db
+      .select({ id: projects.id })
+      .from(projects)
+      .where(and(eq(projects.id, projectId), eq(projects.userId, userId)))
+      .limit(1)
+    if (owned.length === 0)
+      return { ok: false, error: 'Proyecto no encontrado.' }
+  }
+
   const [task] = await db
     .insert(tasks)
     .values({
@@ -79,6 +110,7 @@ export async function createTask(formData: FormData): Promise<ActionResult> {
       priority: parsePriority(formData.get('priority')),
       status: parseStatus(formData.get('status')),
       dueDate: parseDueDate(formData.get('dueDate')),
+      projectId,
     })
     .returning()
 
@@ -104,6 +136,17 @@ export async function updateTask(formData: FormData): Promise<ActionResult> {
   if (descriptionRaw.length > 1000)
     return { ok: false, error: 'La descripción no puede superar 1000 caracteres.' }
 
+  const projectId = parseProjectId(formData.get('projectId'))
+  if (projectId !== null) {
+    const owned = await db
+      .select({ id: projects.id })
+      .from(projects)
+      .where(and(eq(projects.id, projectId), eq(projects.userId, userId)))
+      .limit(1)
+    if (owned.length === 0)
+      return { ok: false, error: 'Proyecto no encontrado.' }
+  }
+
   const [task] = await db
     .update(tasks)
     .set({
@@ -112,6 +155,7 @@ export async function updateTask(formData: FormData): Promise<ActionResult> {
       priority: parsePriority(formData.get('priority')),
       status: parseStatus(formData.get('status')),
       dueDate: parseDueDate(formData.get('dueDate')),
+      projectId,
       updatedAt: new Date(),
     })
     .where(and(eq(tasks.id, id), eq(tasks.userId, userId)))
