@@ -67,4 +67,9 @@ apply-progress.md 3.8K  design.md 4.2K  proposal.md 4.2K  spec.md 10.5K  tasks.m
 
 ## Commit evidence
 
-(pending)
+Branch `chore/repo-debt-cleanup`, two atomic work-unit commits:
+
+- `d7d84e9` `chore(repo): ignore local tooling dirs and untrack agent-skills lock` — `.gitignore` (+4), `skills-lock.json` index entry removed (-100)
+- `b1bff35` `chore(openspec): move security-hardening change docs into archive` — 5 renames + this document (+70)
+
+Not pushed. `odd/tasks/add-project-workspace-support.md` was deliberately left uncommitted: it belongs to the previous feature, not to this cleanup.
