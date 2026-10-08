@@ -24,4 +24,8 @@ node_modules/
 # IDE / tool internals
 .claude/
 .agents/
+.opencode/
 .atl/
+
+# Local agent-skills lock (describes .agents/ content, which is not tracked)
+skills-lock.json
