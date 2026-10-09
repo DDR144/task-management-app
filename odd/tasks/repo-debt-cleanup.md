@@ -73,3 +73,9 @@ Branch `chore/repo-debt-cleanup`, two atomic work-unit commits:
 - `b1bff35` `chore(openspec): move security-hardening change docs into archive` — 5 renames + this document (+70)
 
 Not pushed. `odd/tasks/add-project-workspace-support.md` was deliberately left uncommitted: it belongs to the previous feature, not to this cleanup.
+
+## Integration
+
+Fast-forwarded into `main` from `chore/repo-debt-cleanup`: no merge commit, history stays linear.
+`origin/main` still points at `f53b224` until the push is explicitly authorized — the push is a separate
+user decision from the integration.
