@@ -30,4 +30,4 @@ Source: `openspec/changes/add-project-workspace-support/proposal.md`
 
 ## Commit evidence
 
-(pending — no commit yet; user has not authorized commit)
+- `f53b224` feat(projects): add project workspace support — pushed to `origin/main`
