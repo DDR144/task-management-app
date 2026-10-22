@@ -2,6 +2,17 @@
 
 A Kanban-style task management application built with Next.js, Better Auth, and Drizzle ORM.
 
+## Features
+
+- **Projects**: tasks are grouped by project. The top bar carries a project selector, and the Kanban board only shows
+tasks of the selected project, so each project is its own workspace. A `Personal` project is created automatically
+on first use; the current selection travels in the `projectId` query parameter, and the last choice is remembered in
+`localStorage` so a reload without that parameter restores it.
+- **Kanban board**: drag and drop between columns, guarded by an optimistic lock so a stale update is rejected
+instead of silently overwriting a newer change.
+- **Due dates**: stored as calendar dates with no timezone semantics and rendered as the local calendar date.
+- **Auth**: Better Auth, with a session cookie check in the proxy for protected routes.
+
 ## Prerequisites
 
 - Node.js 24+
@@ -43,6 +54,7 @@ pnpm exec drizzle-kit migrate
 | `pnpm start` | Start production server |
 | `pnpm lint` | Run ESLint |
 | `pnpm typecheck` | Run TypeScript type checking |
+| `pnpm test` | Run the test suite (offline, no database required) |
 
 ## Architecture
 
