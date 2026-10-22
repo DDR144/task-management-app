@@ -29,7 +29,7 @@ their project, auto-created "Personal" project) and the new test script.
 - [x] 2. Close and archive the `add-project-workspace-support` OpenSpec change (S2)
 - [x] 3. Add the first test suite for due-date behavior and wire it into CI (S3)
 - [x] 4. Document the projects feature and the test script in the README (S4)
-- [ ] 5. Verify everything (typecheck, lint, tests, CI wiring) and integrate into `main`
+- [x] 5. Verify everything (typecheck, lint, tests, CI wiring) and integrate into `main`
 
 ## Log
 
@@ -57,7 +57,10 @@ rather than being faked with mocks that cannot catch the real regression.
   from `import.meta.url` instead of `__dirname`; tests still pass.
 - The openspec move is recorded as a rename by git; the promoted spec carries eight requirements with `path:line`
   evidence and the archive report records the two proposal claims the shipped code does not match.
-- NOT verified: the GitHub Actions bump and the new CI test step can only be proven by a CI run, which requires a push.
+- Verified by CI (run `39705076377` on PR #1): the workflow passed in 31 s with the bumped actions,
+  `pnpm/action-setup@v6` correctly read `packageManager` from `package.json` (the frozen-lockfile install succeeded) and
+  the new `pnpm test` step ran green. The Node.js 20 deprecation annotation is gone; only GitHub's informational
+  `ubuntu-latest` → Ubuntu 26 notice remains, which this workflow does not control.
 - NOT covered by the suite: the optimistic-lock and project-filtering bugs live in DB-backed code and need an
   integration harness. Recorded as the next slice rather than faked with mocks that could not catch the regression.
 
@@ -75,3 +78,8 @@ requested before the next commit.
 - `f8c8227` chore(lint): ignore the untracked tooling directory
 - `1e1b41d` docs(readme): document projects feature and test script (S4)
 - `51063c6` docs(openspec): close and archive the project workspace change (S2)
+- `0bb37e0` docs(odd): record close-backlog-gaps verification and slice boundary
+- Native review lineage `review-cb72d46f5e3aee57`: **approved**, authority burned. Three non-blocking advisory findings
+  tracked as follow-up: rollover dates codified by a test, the test include glob matching only `.ts`, and the
+  unrequested eslint ignore.
+- Delivered as PR #1: https://github.com/DDR144/task-management-app/pull/1 (CI run `39705076377`, success).
