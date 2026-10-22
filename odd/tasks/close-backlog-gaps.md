@@ -25,10 +25,10 @@ their project, auto-created "Personal" project) and the new test script.
 
 ## Tasks
 
-- [ ] 1. Bump the three GitHub Actions to their current majors (S1)
-- [ ] 2. Close and archive the `add-project-workspace-support` OpenSpec change (S2)
-- [ ] 3. Add the first test suite for due-date behavior and wire it into CI (S3)
-- [ ] 4. Document the projects feature and the test script in the README (S4)
+- [x] 1. Bump the three GitHub Actions to their current majors (S1)
+- [x] 2. Close and archive the `add-project-workspace-support` OpenSpec change (S2)
+- [x] 3. Add the first test suite for due-date behavior and wire it into CI (S3)
+- [x] 4. Document the projects feature and the test script in the README (S4)
 - [ ] 5. Verify everything (typecheck, lint, tests, CI wiring) and integrate into `main`
 
 ## Log
@@ -47,8 +47,31 @@ rather than being faked with mocks that cannot catch the real regression.
 
 ## Verification
 
-(pending)
+- `pnpm test` → 1 file, 12 tests passed (vitest 5.0.5). The suite is offline and needs no database.
+- `pnpm typecheck` → exit 0.
+- `pnpm lint` → "ESLint: No issues found" (after ignoring the untracked `.opencode/` tooling directory).
+- Extraction verified by diff: `app/actions/tasks.ts` and `components/task-card.tsx` only lost their local definitions
+  and gained the import; `lib/task-dates.ts` holds the identical implementations. The only signature difference is the
+  parameter type widening from `FormDataEntryValue | null` to `string | File | null`, the same union.
+- Vitest's ESM/CommonJS config warning was removed by renaming the config to `vitest.config.mts` and deriving the root
+  from `import.meta.url` instead of `__dirname`; tests still pass.
+- The openspec move is recorded as a rename by git; the promoted spec carries eight requirements with `path:line`
+  evidence and the archive report records the two proposal claims the shipped code does not match.
+- NOT verified: the GitHub Actions bump and the new CI test step can only be proven by a CI run, which requires a push.
+- NOT covered by the suite: the optimistic-lock and project-filtering bugs live in DB-backed code and need an
+  integration harness. Recorded as the next slice rather than faked with mocks that could not catch the regression.
+
+## Delivery slice
+
+Six commits, 487 authored changed lines excluding lock files, so the ~400-line review slice is exceeded. The repository
+policy is `delivery_strategy: ask-on-risk` (`openspec/config.yaml`), so the delivery decision belongs to the user and is
+requested before the next commit.
 
 ## Commit evidence
 
-(pending)
+- `03476c3` docs(odd): track backlog closeout tasks
+- `38e8094` chore(ci): bump GitHub Actions to current majors (S1)
+- `a875ea1` test: add due-date suite and run it in CI (S3)
+- `f8c8227` chore(lint): ignore the untracked tooling directory
+- `1e1b41d` docs(readme): document projects feature and test script (S4)
+- `51063c6` docs(openspec): close and archive the project workspace change (S2)
