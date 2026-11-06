@@ -83,3 +83,15 @@ requested before the next commit.
   tracked as follow-up: rollover dates codified by a test, the test include glob matching only `.ts`, and the
   unrequested eslint ignore.
 - Delivered as PR #1: https://github.com/DDR144/task-management-app/pull/1 (CI run `39705076377`, success).
+
+## Merge
+
+The user authorized the merge. PR #1 merged into `main` with a merge commit so each work-unit commit stays reachable
+and the evidence above still resolves.
+
+- Merge commit `382cdde` on `main`, PR state `MERGED` at 2026-11-06T11:53:37Z.
+- Local `main` fast-forwarded to `382cdde`; stale local branch `chore/close-backlog-gaps` deleted.
+- Post-merge CI on `main`: run `42213573764`.
+
+Open follow-ups carried forward: the three non-blocking review advisories and the DB-backed integration slice for
+the optimistic lock and project filtering.
