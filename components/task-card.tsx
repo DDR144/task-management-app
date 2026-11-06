@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { Calendar, GripVertical, MoreVertical } from 'lucide-react'
 import { deleteTask, updateTaskStatus } from '@/app/actions/tasks'
+import { formatDueDate } from '@/lib/task-dates'
 import type { Task, TaskPriority, TaskStatus } from '@/lib/db/schema'
 import {
   PRIORITY_BADGE,
@@ -30,28 +31,6 @@ import {
  * Tokens are UUIDs generated client-side; raw DB IDs never leave the DOM.
  */
 export const dragTokenMap = new Map<string, number>()
-
-function formatDueDate(value: string | null): {
-  label: string
-  overdue: boolean
-} | null {
-  if (!value) return null
-  const parts = value.split('-')
-  if (parts.length !== 3) return null
-  const [y, m, d] = parts.map(Number)
-  if (!y || !m || !d) return null
-  const local = new Date(y, m - 1, d)
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  const overdue = local < today
-  return {
-    label: local.toLocaleDateString('es-ES', {
-      day: 'numeric',
-      month: 'short',
-    }),
-    overdue,
-  }
-}
 
 export function TaskCard({
   task,

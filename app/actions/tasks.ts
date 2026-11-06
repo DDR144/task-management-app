@@ -12,6 +12,7 @@ import {
 import { and, asc, desc, eq, sql } from 'drizzle-orm'
 import { headers } from 'next/headers'
 import { revalidatePath } from 'next/cache'
+import { parseDueDate } from '@/lib/task-dates'
 
 const PRIORITIES: TaskPriority[] = ['alta', 'media', 'baja']
 const STATUSES: TaskStatus[] = ['pendiente', 'en_progreso', 'completada']
@@ -42,12 +43,6 @@ function parsePriority(value: FormDataEntryValue | null): TaskPriority {
 function parseStatus(value: FormDataEntryValue | null): TaskStatus {
   const v = String(value ?? '').trim()
   return STATUSES.includes(v as TaskStatus) ? (v as TaskStatus) : 'pendiente'
-}
-
-function parseDueDate(value: FormDataEntryValue | null): string | null {
-  const v = String(value ?? '').trim()
-  if (!v) return null
-  return /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : null
 }
 
 function parseProjectId(value: FormDataEntryValue | null): number | null {

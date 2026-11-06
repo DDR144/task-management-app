@@ -3,7 +3,7 @@ import tseslint from "typescript-eslint";
 
 const config = [
   {
-    ignores: ["node_modules/**", ".next/**", "drizzle/**", ".agents/**"],
+    ignores: ["node_modules/**", ".next/**", "drizzle/**", ".agents/**", ".opencode/**"],
   },
   ...nextCoreWebVitals,
   ...tseslint.configs.recommended,
